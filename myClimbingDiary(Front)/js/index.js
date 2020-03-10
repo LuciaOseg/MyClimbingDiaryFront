@@ -1,3 +1,4 @@
+//console.log("entra")
 $('#login_button').on('click', function(){
   // cargar email y password de su html
   let email = $('#email').val()
@@ -25,7 +26,8 @@ $('#login_button').on('click', function(){
       window.location = 'climbingDiary.html'
     },
     error: function(error_msg) {
-      alert("Error en contraseña")
+      //alert((error_msg['responseText']));
+      alert("Correo o usuario incorrecto")
     }
   })
 })

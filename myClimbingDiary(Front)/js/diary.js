@@ -326,7 +326,7 @@ $('#btn_logout').on('click', function(){
     success: function(){
       alert("Bye Bye");
       console.log('success: ');
-      window.location = 'index.html'
+      window.location = 'index2.html'
     },
     error: function(error_msg) {
         alert((error_msg['responseText']));
