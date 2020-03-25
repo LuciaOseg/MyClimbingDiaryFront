@@ -1,7 +1,7 @@
 <script src="js/lib/jquery.js" type="text/javascript"></script>
 <script src="js/js.js" type="text/javascript"></script>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
 <!DOCTYPE html>
 <html>
@@ -79,54 +79,76 @@
 </head>
 
 <body>
-	<section id="search_form" style="display: none">
-		<!-- <div class="logout" id= "btn_logout">Logout</div> -->
-		<!-- <div id="logo">My Climbing Diary</div> -->
-		<label>Nombre</label>
-		<select id="nombre_rutas">
-		</select><br>
-		<label>Grado de dificultad:</label> <label id="answer_grados"></label>
-		<label>Zona:</label> <label id="answer_zona"></label>
 
-		<button id="btn_select" class="button">Seleccionar</button>
-		<button id="btn_add" class="button">Anadir</button>
-		</div>
-		<section id="display_entries" class="hidden">
-			<div id=form>
-				<div id="title"> Entradas</div>
-				<section id="miniForm" class="group">
-					<label id="nombre">Nombre</label>
-					<label id="fecha">
-						Fecha
-					</label>
-					<label id="pegues"> 8 pegues</label>
 
-					<div id="comment">
-						<label id="acomment">Comentario mama</label>
-						<input id="ncomment" type="text" name="newcomentario" placeholder="add new comment"
-							class="hidden">
+
+
+
+	<div class="container-fluid" style="width: 75%;">
+		<div class="row" style="margin-top: 30px; width: 80%;">
+			<div class="col-md-12">
+				<div class="container">
+
+					<section id="search_form" style="display: none">
+						<!-- <div class="logout" id= "btn_logout">Logout</div> -->
+						<!-- <div id="logo">My Climbing Diary</div> -->
+						<label>Nombre</label>
+						<select id="nombre_rutas">
+						</select><br>
+						<label>Grado de dificultad:</label> <label id="answer_grados"></label>
+						<label>Zona:</label> <label id="answer_zona"></label>
+
+						<button id="btn_select" class="button">Seleccionar</button>
+						<button id="btn_add" class="button">Anadir</button>
+						
+					</section>
+				</div>
+			</div>
+			<!-- <div class="row" style="margin-top: 30px;"> -->
+				<div class="col-md-12">
+					<div class="container">
+						<section id="display_entries" class="hidden">
+							<div id=form>
+								<div id="title"> Entradas</div>
+								<section id="miniForm" class="group">
+									<label id="nombre">Nombre</label>
+									<label id="fecha">
+										Fecha
+									</label>
+									<label id="pegues"> 8 pegues</label>
+
+									<div id="comment">
+										<label id="acomment">Comentario mama</label>
+										<input id="ncomment" type="text" name="newcomentario" placeholder="add new comment"
+											class="hidden">
+									</div>
+									<button id="btn_edit" class="button">Editar</button>
+									<button id="btn_patch" value="${data[i]._id}" class="hidden">Actualizar</button>
+									<button id="btn_delete" value="${data[i]._id}" class="button">Eliminar</button>
+								</section>
+							</div>
+						</section>
 					</div>
-					<button id="btn_edit" class="button">Editar</button>
-					<button id="btn_patch" value="${data[i]._id}" class="hidden">Actualizar</button>
-					<button id="btn_delete" value="${data[i]._id}" class="button">Eliminar</button>
-				</section>
-			</div>
-		</section>
-		<section id="add_entry" class="hidden">
-			<div id=form>
-				<div id="title"> Registro </div>
-				<section id="miniForm">
-					<label id="fecha">Selecciona Fecha</label>
-					<input id="date" type="date" value="2017-06-01">
-					<label id="pegues">Numero Pegues</label>
-					<input id="num" type="text" name="pegue" placeholder="2">
-					<textarea id="com" rows="4" cols="50" placeholder="Comentario"></textarea>
-					<button id="btn_save" class="button">Guardar</button>
-				</section>
-			</div>
-		</section>
 
-	</section>
+					<section id="add_entry" class="hidden">
+						<div id=form>
+							<div id="title"> Registro </div>
+							<section id="miniForm">
+								<label id="fecha">Selecciona Fecha</label>
+								<input id="date" type="date" value="2017-06-01">
+								<label id="pegues">Numero Pegues</label>
+								<input id="num" type="text" name="pegue" placeholder="2">
+								<textarea id="com" rows="4" cols="50" placeholder="Comentario"></textarea>
+								<button id="btn_save" class="button">Guardar</button>
+							</section>
+						</div>
+					</section>
+				</div>
+			<!-- </div> -->
+			
+		</div>
+	</div>
+</div>
 
 	<script src="js/diary.js" type="text/javascript"></script>
 </body>
