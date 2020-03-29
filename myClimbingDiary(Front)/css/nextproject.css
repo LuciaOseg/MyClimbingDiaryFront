@@ -1,0 +1,266 @@
+* {
+  box-sizing: border-box;
+}
+
+/*html { 
+  background: url('../img/background.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+*/
+.navbar{
+  background-color: rgba(0, 0, 0, 0.742) !important;
+  }
+
+.navbar-brand{
+  color: white;
+}
+
+#btn_logout{
+  color: white;
+}
+
+#sidebar-container {
+  min-height: 100vh;   
+  background-color: rgba(0,0,0,0.5) !important;
+  padding: 0;
+}
+
+/* Sidebar sizes when expanded and expanded */
+.sidebar-expanded {
+  width: 230px;
+}
+.sidebar-collapsed {
+  width: 60px;
+}
+
+/* Menu item*/
+#sidebar-container .list-group a {
+  height: 50px;
+  color: white;
+  background-color: rgba(0,0,0,0.5) !important;
+}
+
+/* Submenu item*/
+#sidebar-container .list-group .sidebar-submenu a {
+  height: 45px;
+  padding-left: 30px;
+}
+.sidebar-submenu {
+  font-size: 0.9rem;
+}
+
+/* Separators */
+.sidebar-separator-title {
+  background-color: rgba(0,0,0,0.5) !important;
+  height: 35px;
+}
+.sidebar-separator {
+  background-color: rgba(0,0,0,0.5) !important;
+  height: 25px;
+}
+.logo-separator {
+  background-color: rgba(0,0,0,0.5) !important;   
+  height: 60px;
+}
+
+/* Closed submenu icon */
+#sidebar-container .list-group .list-group-item[aria-expanded="false"] .submenu-icon::after {
+content: " \f0d7";
+font-family: FontAwesome;
+display: inline;
+text-align: right;
+padding-left: 10px;
+}
+/* Opened submenu icon */
+#sidebar-container .list-group .list-group-item[aria-expanded="true"] .submenu-icon::after {
+content: " \f0da";
+font-family: FontAwesome;
+display: inline;
+text-align: right;
+padding-left: 10px;
+}
+
+body {
+   background: #f2f2f2;
+  background-image:url('../img/annapurna.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: #333333;
+}
+
+div {
+  display: block;
+}
+
+#num{
+  width: 10%;
+  font-size: 20px;
+  color: #000000;
+}
+
+#com{
+  width: 100%;
+  height: 100px;
+  display: block;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+  color: #000000;
+  border-color: blue;
+}
+
+#container-home {
+  width: 800px;
+  background: #ffffff;
+  margin: auto;
+  padding: 40px 50px;
+}
+#logo{
+  margin: 10px 10px 50px 230px;
+  width: 50%;
+  font-size: 30px;
+  align-content: center;
+  font-family: 'Public Sans', sans-serif;
+}
+label {
+  font-family: 'Open Sans', sans-serif;
+  margin: 10px 20px 10px 62px;
+  display: inline-block
+}
+#title{
+  /* position:absolute;
+  left:235;
+  top:320px; */
+  font-size: 25px;
+  font-family: 'Public Sans', sans-serif;
+}
+.hidden {
+  display: none;
+}
+
+
+#comment{
+  margin: 20px 60px;
+  font-family: 'Open Sans', sans-serif;
+  color: gray;
+}
+
+/*#fecha, #pegues{
+   margin: 20px 20px;
+  font-family: 'Public Sans', sans-serif;
+}
+*/
+
+
+select{
+  font-family: 'Open Sans', sans-serif;
+  width: 150px;
+  height: 25px;
+}
+
+#miniForm {
+  /* position: relative;
+  left:208;
+  top: -250px; */
+  /* width: 900px; */
+  background: #ffffff;
+  margin: 30px;
+  padding: 70px 50px;
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+
+}
+
+.input_wrap {
+  padding: 10px 0 0 0;
+  margin-bottom: 35px;
+  border-bottom: 2px solid  #5DADE2;
+}
+
+.input_wrap_sel {
+    border-bottom: 2px solid  #5DADE2;
+}
+
+/*input::placeholder {
+  color:  gray ;
+  font-size: 20px;
+}
+
+input:focus::placeholder {
+  color: transparent;
+}*/
+
+#date{
+  color:gray;
+  /*width: 25%;*/
+}
+
+/*input {
+  height: 45px;
+  width: 50%;
+  background: transparent;
+  padding: 0 5px;
+  font-size: 20px;
+  color:  #5DADE2 ;
+  outline: none;
+  border: none;
+  overflow: visible;
+}*/
+
+#container-button {
+  width: 300px;
+}
+
+#newcom{
+  background-color: #5DADE2;
+  color: black;
+}
+
+#signup_option {
+  font-size: 13px;
+  text-align: center;
+  margin: 5px 0 0 0;
+}
+
+#container-logout {
+  float: right;
+}
+
+/* .grid-container {
+  display: grid;
+  grid-auto-flow: row;
+  justify-items: stretch;
+  align-items: stretch;
+  padding: 10px 0;
+} */
+
+.wrapper-busqueda {
+  grid-column: 1 / span 12;
+  grid-row: 1 / span 5;
+}
+
+
+#search_form {
+  /* position: absolute;
+  left:235;
+  top:100px; */
+  /* width: 900px; */
+  height: 200px; 
+  background: #ffffff;
+  padding: 40px 50px;
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+}
+
+#btn-search {
+  background-color: transparent;
+}
+
+label {
+  margin: 10 0;
+}
+
+.card .btn {
+  float: right;
+}
