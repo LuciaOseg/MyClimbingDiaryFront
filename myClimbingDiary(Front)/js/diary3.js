@@ -220,6 +220,7 @@ $('#btn_save').on('click', function(){
         "comentario": $('#com').val()
       }]
     };
+    console.log(json_to_send);
 
     //checa si se llenaron los campos
     if($('#num').val()!= "" & $('#com').val()!= ""){
@@ -238,7 +239,7 @@ $('#btn_save').on('click', function(){
           success: function(data){
             alert("Registro agregado con exito");
             console.log('success: '+ data);
-            window.location = 'climbingDiary2.html'
+            window.location = 'climbingDiary3.html'
           },
           error: function(error_msg) {
             console.log(json_to_send);
@@ -285,7 +286,7 @@ $(document).on('click', '#btn_delete', function(event) {
     success: function(){
       alert("Registro Eliminado");
       console.log('Deleted ');
-      window.location = 'climbingDiary2.html'
+      window.location = 'climbingDiary3.html'
     },
     error: function(error_msg) {
         alert((error_msg['responseText']));
@@ -343,7 +344,7 @@ $(document).on('click','#btn_patch', function(event){
           success: function(data){
             alert("Registro editado con exito");
             console.log('Edit: '+ data + "id: "+ id);
-            window.location = 'climbingDiary2.html'
+            window.location = 'climbingDiary3.html'
           },
           error: function(error_msg) {
             console.log(json_to_send);
