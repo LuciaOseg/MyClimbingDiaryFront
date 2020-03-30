@@ -6,6 +6,12 @@ Date.prototype.toDateInputValue = (function() {
     return local.toJSON().slice(0,10);
 });
 
+//Jala el token para futuras acciones
+var token = localStorage.getItem('token');
+if (token) {
+  token = token.replace(/^"(.*)"$/, '$1'); // Remove quotes from token start/end.
+}
+
 //Set the date for today
 $(document).ready( function() {
     $('#date').val(new Date().toDateInputValue());
@@ -98,26 +104,26 @@ $('#btn_add').on('click', function(){
 var entries = [];
 ///Carga el nombre de las rutas en el select
 function getFields(){
-  $("#nombre_rutas").children("option").remove();
+  //$("#nombre_rutas").children("option").remove();
   $.ajax({
-    url: "https://myclimbingdiary.herokuapp.com/proyectos",
+    url: "https://myclimbingdiary.herokuapp.com/rutas",
     method: "GET",
     dataType: "json",
 
     success: function(data){
-      entries = data;
-      let zonas = data;
-      let zonasUnicas = Array.from(new Set(zonas.map(a => a.zona)));
+      //entries = data;
+      //let zonas = data;
+      //let zonasUnicas = Array.from(new Set(zonas.map(a => a.zona)));
       // let gradosUnicos = Array.from(new Set(zonas.map(a => a.grado)));
-      
+      //console.log(entries);
       // Llenar select de zonas 
       let nuevo_html = " ";
       nuevo_html += `<option id="nulo"></option>`;
-      for (var i = 0; i < zonasUnicas.length; i++) {
+      for (var i = 0; i < data.length; i++) {
         fields = data
         nuevo_html += `
-        <option value="${zonasUnicas[i]}">
-          ${zonasUnicas[i]}
+        <option value="${data[i].nombre}">
+          ${data[i].nombre}
         </option>
         `
       }
@@ -143,21 +149,69 @@ function getFields(){
 }
 getFields();
 
+function getEntries(){
+  //$("#nombre_rutas").children("option").remove();
+  $.ajax({
+    url: "https://myclimbingdiary.herokuapp.com/proyectos",
+    headers: {
+       'Content-Type':'application/json',
+       'Authorization': 'Bearer ' + token
+   },
+    method: "GET",
+    dataType: "json",
+
+
+    success: function(data){
+      entries = data;
+      //let zonasUnicas = Array.from(new Set(zonas.map(a => a.zona)));
+      // let gradosUnicos = Array.from(new Set(zonas.map(a => a.grado)));
+      //console.log(entries);
+      // Llenar select de zonas 
+      // let nuevo_html = " ";
+      // nuevo_html += `<option id="nulo"></option>`;
+      // for (var i = 0; i < entries.length; i++) {
+      //   fields = data
+      //   nuevo_html += `
+      //   <option value="${entries[i].nombre}">
+      //     ${entries[i].nombre}
+      //   </option>
+      //   `
+      // }
+      // $("#selectZona").append(nuevo_html);
+
+      // Llenar select de grados
+      // nuevo_html = " ";
+      // nuevo_html += `<option id="nulo"></option>`;
+      // for (var i = 0; i < gradosUnicos.length; i++) {
+      //   fields = data
+      //   nuevo_html += `
+      //   <option value="${gradosUnicos[i]}">
+      //     ${gradosUnicos[i]}
+      //   </option>
+      //   `
+      // }
+      // $("#selectGrado").append(nuevo_html);
+    },
+    error: function(error_msg){
+      console.error(error_msg)
+    }
+  });
+}
+getEntries();
+
 // Search
 $('#btn-search').on('click', function(){
   $("#diaryEntries").empty();
-
-  let zona = $('#selectZona').children('option:selected').val();
+  let nombre = $('#selectZona').children('option:selected').val();
   // let grado = $('#selectGrado').children('option:selected').val();
 
-  
 
   $("#diaryEntries").innerHTML = "";
   let nuevo_html = " ";
   for (var i = 0; i < entries.length; i++) {
     // Si hay zona y grado
-    if (zona != '') {
-      if(entries[i].zona == zona) {
+    if (nombre != '') {
+      if(entries[i].nombre == nombre) {
         nuevo_html += `
         <div class="col-sm-4">
         <div class="card bg-light">
@@ -234,11 +288,7 @@ $("#nombre_rutas").on('change', function(event){
 })
 
 
-//Jala el token para futuras acciones
-var token = localStorage.getItem('token');
-if (token) {
-  token = token.replace(/^"(.*)"$/, '$1'); // Remove quotes from token start/end.
-}
+
 
 //Añade nuevo Registro
 $('#btn_save').on('click', function(){
