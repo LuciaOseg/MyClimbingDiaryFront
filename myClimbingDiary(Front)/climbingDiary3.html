@@ -60,16 +60,62 @@
 	<div class="container-fluid">
 		<br><br>
 
-		<div class="row">
-			<button id="btn-mas" href="#" class="btn" role="button" data-toggle="modal" data-target="#modalDiary">
+		<div class="row">		
+			<div class="form" style="padding-left: 10px;">
+				<div class="form-group">
+	    			<label for="selectZona">
+	    				<h5>Selecciona una zona</h5>
+	    			</label>
+	    			<select class="form-control" id="selectZona">
+	      				<option>La Boca</option>
+	      				<option>2</option>
+	      				<option>3</option>
+	      				<option>4</option>
+	      				<option>5</option>
+	    			</select>
+	  			</div>
+			</div>
+
+			<button id="btn-search" href="#" class="btn" role="button" style="padding-left: 10px;">
+				<br>
+				<img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBoZWlnaHQ9IjUxMnB4IiB2aWV3Qm94PSIwIDAgNDQ4IDQ0OCIgd2lkdGg9IjUxMnB4Ij48cGF0aCBkPSJtMjk2IDIwOGMwIDQ4LjYwMTU2Mi0zOS4zOTg0MzggODgtODggODhzLTg4LTM5LjM5ODQzOC04OC04OCAzOS4zOTg0MzgtODggODgtODggODggMzkuMzk4NDM4IDg4IDg4em0wIDAiIGZpbGw9IiMwMDAwMDAiLz48cGF0aCBkPSJtMjI0IDBjLTEyMy43MTA5MzggMC0yMjQgMTAwLjI4OTA2Mi0yMjQgMjI0czEwMC4yODkwNjIgMjI0IDIyNCAyMjQgMjI0LTEwMC4yODkwNjIgMjI0LTIyNGMtLjE0MDYyNS0xMjMuNjUyMzQ0LTEwMC4zNDc2NTYtMjIzLjg1OTM3NS0yMjQtMjI0em0xMTcuNjU2MjUgMzQxLjY1NjI1Yy0zLjEyNSAzLjEyMTA5NC04LjE4NzUgMy4xMjEwOTQtMTEuMzEyNSAwbC01NC43Njk1MzEtNTQuNzYxNzE5Yy00Mi41NTA3ODEgMzYuNDcyNjU3LTEwNi4zMTY0MDcgMzIuNzkyOTY5LTE0NC4zOTQ1MzEtOC4zMjgxMjUtMzguMDc4MTI2LTQxLjEyMTA5NC0zNi44NTE1NjMtMTA0Ljk4MDQ2OCAyLjc3NzM0My0xNDQuNjA5Mzc1IDM5LjYyODkwNy0zOS42Mjg5MDYgMTAzLjQ4ODI4MS00MC44NTU0NjkgMTQ0LjYwOTM3NS0yLjc3NzM0MyA0MS4xMjEwOTQgMzguMDc4MTI0IDQ0LjgwMDc4MiAxMDEuODQzNzUgOC4zMjgxMjUgMTQ0LjM5NDUzMWw1NC43NjE3MTkgNTQuNzY5NTMxYzMuMTIxMDk0IDMuMTI1IDMuMTIxMDk0IDguMTg3NSAwIDExLjMxMjV6bTAgMCIgZmlsbD0iIzAwMDAwMCIvPjwvc3ZnPgo=" width="50px" height="50px"/>
+			</button>
+			<button id="btn-mas" href="#" class="btn" role="button" data-toggle="modal" data-target="#modalDiary" style="padding-left: 10px;">
+				<br>
 				<img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBoZWlnaHQ9IjUxMnB4IiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgd2lkdGg9IjUxMnB4Ij48cGF0aCBkPSJtMjU2IDBjLTE0MS4xNjQwNjIgMC0yNTYgMTE0LjgzNTkzOC0yNTYgMjU2czExNC44MzU5MzggMjU2IDI1NiAyNTYgMjU2LTExNC44MzU5MzggMjU2LTI1Ni0xMTQuODM1OTM4LTI1Ni0yNTYtMjU2em0xMTIgMjc3LjMzMjAzMWgtOTAuNjY3OTY5djkwLjY2Nzk2OWMwIDExLjc3NzM0NC05LjU1NDY4NyAyMS4zMzIwMzEtMjEuMzMyMDMxIDIxLjMzMjAzMXMtMjEuMzMyMDMxLTkuNTU0Njg3LTIxLjMzMjAzMS0yMS4zMzIwMzF2LTkwLjY2Nzk2OWgtOTAuNjY3OTY5Yy0xMS43NzczNDQgMC0yMS4zMzIwMzEtOS41NTQ2ODctMjEuMzMyMDMxLTIxLjMzMjAzMXM5LjU1NDY4Ny0yMS4zMzIwMzEgMjEuMzMyMDMxLTIxLjMzMjAzMWg5MC42Njc5Njl2LTkwLjY2Nzk2OWMwLTExLjc3NzM0NCA5LjU1NDY4Ny0yMS4zMzIwMzEgMjEuMzMyMDMxLTIxLjMzMjAzMXMyMS4zMzIwMzEgOS41NTQ2ODcgMjEuMzMyMDMxIDIxLjMzMjAzMXY5MC42Njc5NjloOTAuNjY3OTY5YzExLjc3NzM0NCAwIDIxLjMzMjAzMSA5LjU1NDY4NyAyMS4zMzIwMzEgMjEuMzMyMDMxcy05LjU1NDY4NyAyMS4zMzIwMzEtMjEuMzMyMDMxIDIxLjMzMjAzMXptMCAwIiBmaWxsPSIjMDAwMDAwIi8+PC9zdmc+Cg==" width="50px" height="50px"/>
 			</button>
-			
 		</div>
 
 		<!-- DIARY -->
-		<div class="row">
-			
+		<div class="row" id="diaryEntries">
+			<div class="col-sm-4">
+				<div class="card bg-light">
+					<div class="card-header">
+					 	<h5 id="entry_name">Nombre Ruta</h5>
+					</div>
+				  	<div class="card-body">
+					    <p class="card-text">
+					    	<strong>Zona:</strong> La Boca
+					    </p>
+					    <p class="card-text">
+					    	<strong>Grado:</strong> 5.12d
+					    </p>
+					    <p class="card-text">
+			                <strong>Pegues:</strong> 2
+			            </p>
+			            <p class="card-text">
+			                Comentario
+			            </p>
+				  		<button type="button" class="btn btn-danger">
+				  			Delete
+				  		</button>
+				  		<button type="button" class="btn btn-primary">
+				  			Edit
+				  		</button>
+				  	</div>
+				</div>
+				<br>
+			</div>
 		</div>
 
 		<div class="row" style="margin-top: 30px; width: 80%;">
@@ -143,7 +189,7 @@
 	      <div class="modal-body">
 	        <form>
 			  <div class="form-group">
-			    <label for="nombre_rutas">Nombre;</label>
+			    <label for="nombre_rutas">Nombre:</label>
 			    <select class="form-control" id="nombre_rutas">
 			    </select>
 			  </div>
@@ -178,7 +224,7 @@
 			  </div>
 
 			  <div>
-			  	<textarea id="com" rows="4" cols="50" placeholder="Comentario"></textarea>
+			  	<textarea id="com" rows="4" cols="60" placeholder="Comentario"></textarea>
 			  </div>
 			</form>
 	      </div>

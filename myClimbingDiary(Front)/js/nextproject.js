@@ -150,50 +150,6 @@ $('#btn-search').on('click', function(){
   } else {
     $("#resultados_busqueda").append(nuevo_html);
   }
-
-//   $.ajax({
-//   url: "https://myclimbingdiary.herokuapp.com/rutas",
-//   method: "GET",
-//   dataType: "json",
-
-//   success: function(data){
-//     let nuevo_html = " ";
-//     // nuevo_html += `<option id="nulo">Selecciona una ruta</option>`;
-//     for (var i = 0; i < data.length; i++) {
-//       if(data[i].zona == zona && data[i].grado == grado) {
-//         nuevo_html += `
-//         <div class="col-sm-3">
-//           <div class="card bg-light">
-//             <div class="card-header">
-//               <h5>${data[i].zona}</h5>
-//             </div>
-//               <div class="card-body">
-//                 <p class="card-text">
-//                   <strong>Ruta:</strong> ${data[i].nombre}
-//                 </p>
-//                 <p class="card-text">
-//                   <strong>Grado:</strong> ${data[i].grado}
-//                 </p>
-//                 <button type="button" class="btn btn-primary">
-//                   Add
-//                 </button>
-//               </div>
-//           </div>
-//           <br>
-//         </div>
-//         `
-//       }
-//     }
-//     if(nuevo_html == ""){
-//       alert("No se encontraron rutas");
-//     } else {
-//       $("#resultados_busqueda").append(nuevo_html);
-//     }
-//   },
-//   error: function(error_msg){
-//     console.error(error_msg)
-//   }
-// });
 })
 
 

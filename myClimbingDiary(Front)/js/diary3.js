@@ -1,49 +1,3 @@
-//Mostrar div de diary
-$('#diary').click(function() { 
-  if(document.getElementById("search_form").style.display == "none"){
-    document.getElementById("search_form").style.display = "block"
-  } else {
-    document.getElementById("search_form").style.display = "none";
-  }
-  
-});
-
-
-//////
-$('#body-row .collapse').collapse('hide'); 
-
-// Collapse/Expand icon
-$('#collapse-icon').addClass('fa-angle-double-left'); 
-
-// Collapse click
-$('[data-toggle=sidebar-colapse]').click(function() {
-    SidebarCollapse();
-});
-
-function SidebarCollapse () {
-    $('.menu-collapsed').toggleClass('d-none');
-    $('.sidebar-submenu').toggleClass('d-none');
-    $('.submenu-icon').toggleClass('d-none');
-    $('#sidebar-container').toggleClass('sidebar-expanded sidebar-collapsed');
-    
-    // Treating d-flex/d-none on separators with title
-    var SeparatorTitle = $('.sidebar-separator-title');
-    if ( SeparatorTitle.hasClass('d-flex') ) {
-        SeparatorTitle.removeClass('d-flex');
-    } else {
-        SeparatorTitle.addClass('d-flex');
-    }
-    
-    // Collapse/Expand icon
-    $('#collapse-icon').toggleClass('fa-angle-double-left fa-angle-double-right');
-}
-
-
-
-
-
-/////////////////
-
 
 //Jala la fecha
 Date.prototype.toDateInputValue = (function() {
@@ -66,72 +20,73 @@ function getFormattedDate(date) {
     return month + '/' + day + '/' + year;
 }
 
-var date
+// var date
 //Muestra seccion seleccionada
-$('#btn_select').on('click', function(){
-  $("#form").children("section").remove();
-  //checa si selecciono alguna ruta
-  if(nomSelec != null){
-   $('#add_entry').addClass('hidden')
-   $('#display_entries').removeClass('hidden')
+// $('#btn_select').on('click', function(){
+//   $("#form").children("section").remove();
+//   //checa si selecciono alguna ruta
+//   if(nomSelec != null){
+//    $('#add_entry').addClass('hidden')
+//    $('#display_entries').removeClass('hidden')
 
-   $.ajax({
-     url: "https://myclimbingdiary.herokuapp.com/proyectos",
-     headers: {
-        'Content-Type':'application/json',
-        'Authorization': 'Bearer ' + token
-    },
-     method: "GET",
-     dataType: "json",
+//    $.ajax({
+//      url: "https://myclimbingdiary.herokuapp.com/proyectos",
+//      headers: {
+//         'Content-Type':'application/json',
+//         'Authorization': 'Bearer ' + token
+//     },
+//      method: "GET",
+//      dataType: "json",
 
-     success: function(data){
-        let nuevo_html = " ";
-        var count = 0;
-        for (var i = 0; i < data.length; i++) {
-          if(nomSelec==data[i].nombre){
-            count=count+1;
-            var d = new Date(data[i].pegues[0].fecha);
-            date = getFormattedDate(d)
-            fields = data
-           nuevo_html += `
-           <section id="miniForm" class="group">
-           <label id="nombre">${nomSelec}</label>
-           <label id="fecha">${date}</label>
-           <label id= "pegues"> ${data[i].pegues[0].numeroPegues} pegues</label>
+//      success: function(data){
+//         let nuevo_html = " ";
+//         var count = 0;
+//         for (var i = 0; i < data.length; i++) {
+//           if(nomSelec==data[i].nombre){
+//             count=count+1;
+//             var d = new Date(data[i].pegues[0].fecha);
+//             date = getFormattedDate(d)
+//             fields = data
+//            nuevo_html += `
+//            <section id="miniForm" class="group">
+//            <label id="nombre">${nomSelec}</label>
+//            <label id="fecha">${date}</label>
+//            <label id= "pegues"> ${data[i].pegues[0].numeroPegues} pegues</label>
 
-           <div id="comment" >
-             <label  id="acomment">${data[i].pegues[0].comentario}</label>
-             <input id="ncomment" type="text" name="newcomentario" placeholder="add new comment" class="hidden">
-           </div>
-           <button id="btn_edit" class="button">Editar</button>
-           <button id="btn_patch" value="${data[i]._id}" class="hidden">Actualizar</button>
-           <button id="btn_delete" value="${data[i]._id}" class="button">Eliminar</button>
-            </section>`
-          }
-      }
-      console.log(count)
-      if(count==0){
-        nuevo_html += `
-        <section id="miniForm" class="group">
-        <label id="nombre">No tienes entradas de ${nomSelec}</label>
-         </section>`
+//            <div id="comment" >
+//              <label  id="acomment">${data[i].pegues[0].comentario}</label>
+//              <input id="ncomment" type="text" name="newcomentario" placeholder="add new comment" class="hidden">
+//            </div>
+//            <button id="btn_edit" class="button">Editar</button>
+//            <button id="btn_patch" value="${data[i]._id}" class="hidden">Actualizar</button>
+//            <button id="btn_delete" value="${data[i]._id}" class="button">Eliminar</button>
+//             </section>`
+//           }
+//       }
+//       console.log(count)
+//       if(count==0){
+//         nuevo_html += `
+//         <section id="miniForm" class="group">
+//         <label id="nombre">No tienes entradas de ${nomSelec}</label>
+//          </section>`
 
-      }
-       $("#form").append(nuevo_html);
-       getFields()
-     },
-     error: function(error_msg){
-       console.error(error_msg)
-     }
-   });
+//       }
+//        $("#form").append(nuevo_html);
+//        getFields()
+//      },
+//      error: function(error_msg){
+//        console.error(error_msg)
+//      }
+//    });
 
 
 
- } else {
-   alert("No has seleccionado la ruta");
- }
+//  } else {
+//    alert("No has seleccionado la ruta");
+//  }
 
-})
+// })
+
 //Muestra seccion Añadir
 $('#btn_add').on('click', function(){
   console.log("ADD");
@@ -140,35 +95,114 @@ $('#btn_add').on('click', function(){
 })
 
 
+var entries = [];
 ///Carga el nombre de las rutas en el select
 function getFields(){
   $("#nombre_rutas").children("option").remove();
-$.ajax({
-  url: "https://myclimbingdiary.herokuapp.com/rutas",
-  method: "GET",
-  dataType: "json",
+  $.ajax({
+    url: "https://myclimbingdiary.herokuapp.com/proyectos",
+    method: "GET",
+    dataType: "json",
 
-  success: function(data){
-    let nuevo_html = " ";
-    nuevo_html += `<option id="nulo">Selecciona una ruta</option>`;
-    for (var i = 0; i < data.length; i++) {
-      fields = data
-      nuevo_html += `
-      <option value="${data[i]._id}">
-        ${data[i].nombre}
-      </option>
-      `
+    success: function(data){
+      entries = data;
+      let zonas = data;
+      let zonasUnicas = Array.from(new Set(zonas.map(a => a.zona)));
+      // let gradosUnicos = Array.from(new Set(zonas.map(a => a.grado)));
+      
+      // Llenar select de zonas 
+      let nuevo_html = " ";
+      nuevo_html += `<option id="nulo"></option>`;
+      for (var i = 0; i < zonasUnicas.length; i++) {
+        fields = data
+        nuevo_html += `
+        <option value="${zonasUnicas[i]}">
+          ${zonasUnicas[i]}
+        </option>
+        `
+      }
+      $("#selectZona").append(nuevo_html);
+
+      // Llenar select de grados
+      // nuevo_html = " ";
+      // nuevo_html += `<option id="nulo"></option>`;
+      // for (var i = 0; i < gradosUnicos.length; i++) {
+      //   fields = data
+      //   nuevo_html += `
+      //   <option value="${gradosUnicos[i]}">
+      //     ${gradosUnicos[i]}
+      //   </option>
+      //   `
+      // }
+      // $("#selectGrado").append(nuevo_html);
+    },
+    error: function(error_msg){
+      console.error(error_msg)
     }
-    $("#nombre_rutas").append(nuevo_html);
-  },
-  error: function(error_msg){
-    console.error(error_msg)
-  }
-});
+  });
 }
-
-var fields, nomSelec;
 getFields();
+
+// Search
+$('#btn-search').on('click', function(){
+  $("#diaryEntries").empty();
+
+  let zona = $('#selectZona').children('option:selected').val();
+  // let grado = $('#selectGrado').children('option:selected').val();
+
+  
+
+  $("#diaryEntries").innerHTML = "";
+  let nuevo_html = " ";
+  for (var i = 0; i < entries.length; i++) {
+    // Si hay zona y grado
+    if (zona != '') {
+      if(entries[i].zona == zona) {
+        nuevo_html += `
+        <div class="col-sm-4">
+        <div class="card bg-light">
+          <div class="card-header">
+            <h5 id="entry_name">${entries[i].nombre}</h5>
+          </div>
+            <div class="card-body">
+              <p class="card-text">
+                <strong>Zona:</strong> ${entries[i].zona}
+              </p>
+              <p class="card-text">
+                <strong>Grado:</strong> ${entries[i].grado}
+              </p>
+              <p class="card-text">
+                <strong>Pegues:</strong> ${entries[i].pegues[0].numeroPegues}
+              </p>
+              <p class="card-text">
+                <strong>Pegues:</strong> ${entries[i].pegues[0].comentario}
+              </p>
+              <button type="button" class="btn btn-danger">
+                Delete
+              </button>
+              <button type="button" class="btn btn-primary">
+                Edit
+              </button>
+            </div>
+        </div>
+        <br>
+      </div>
+        `
+      }
+    } 
+   
+
+    }
+    
+  if(nuevo_html == ""){
+    alert("No se encontraron rutas");
+  } else {
+    $("#diaryEntries").append(nuevo_html);
+  }
+})
+
+// var fields, nomSelec;
+// getFields();
 
 //Saca valor zona y grado
 function getInfoField(seleccionadoField){

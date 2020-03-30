@@ -333,3 +333,12 @@ label {
   /*margin: 10px 20px 10px 62px;*/
   display: inline-block
 }
+
+#btn-search {
+  background-color: transparent;
+}
+
+.card .btn {
+  float: right;
+  margin: 3px;
+}
