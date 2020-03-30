@@ -79,9 +79,6 @@ $('#btn-search').on('click', function(){
                 <p class="card-text">
                   <strong>Grado:</strong> ${rutas[i].grado}
                 </p>
-                <button type="button" class="btn btn-primary">
-                  Add
-                </button>
               </div>
           </div>
           <br>
@@ -105,9 +102,6 @@ $('#btn-search').on('click', function(){
                 <p class="card-text">
                   <strong>Grado:</strong> ${rutas[i].grado}
                 </p>
-                <button type="button" class="btn btn-primary">
-                  Add
-                </button>
               </div>
           </div>
           <br>
@@ -131,9 +125,6 @@ $('#btn-search').on('click', function(){
                 <p class="card-text">
                   <strong>Grado:</strong> ${rutas[i].grado}
                 </p>
-                <button type="button" class="btn btn-primary">
-                  Add
-                </button>
               </div>
           </div>
           <br>
