@@ -26,73 +26,6 @@ function getFormattedDate(date) {
     return month + '/' + day + '/' + year;
 }
 
-// var date
-//Muestra seccion seleccionada
-// $('#btn_select').on('click', function(){
-//   $("#form").children("section").remove();
-//   //checa si selecciono alguna ruta
-//   if(nomSelec != null){
-//    $('#add_entry').addClass('hidden')
-//    $('#display_entries').removeClass('hidden')
-
-//    $.ajax({
-//      url: "https://myclimbingdiary.herokuapp.com/proyectos",
-//      headers: {
-//         'Content-Type':'application/json',
-//         'Authorization': 'Bearer ' + token
-//     },
-//      method: "GET",
-//      dataType: "json",
-
-//      success: function(data){
-//         let nuevo_html = " ";
-//         var count = 0;
-//         for (var i = 0; i < data.length; i++) {
-//           if(nomSelec==data[i].nombre){
-//             count=count+1;
-//             var d = new Date(data[i].pegues[0].fecha);
-//             date = getFormattedDate(d)
-//             fields = data
-//            nuevo_html += `
-//            <section id="miniForm" class="group">
-//            <label id="nombre">${nomSelec}</label>
-//            <label id="fecha">${date}</label>
-//            <label id= "pegues"> ${data[i].pegues[0].numeroPegues} pegues</label>
-
-//            <div id="comment" >
-//              <label  id="acomment">${data[i].pegues[0].comentario}</label>
-//              <input id="ncomment" type="text" name="newcomentario" placeholder="add new comment" class="hidden">
-//            </div>
-//            <button id="btn_edit" class="button">Editar</button>
-//            <button id="btn_patch" value="${data[i]._id}" class="hidden">Actualizar</button>
-//            <button id="btn_delete" value="${data[i]._id}" class="button">Eliminar</button>
-//             </section>`
-//           }
-//       }
-//       console.log(count)
-//       if(count==0){
-//         nuevo_html += `
-//         <section id="miniForm" class="group">
-//         <label id="nombre">No tienes entradas de ${nomSelec}</label>
-//          </section>`
-
-//       }
-//        $("#form").append(nuevo_html);
-//        getFields()
-//      },
-//      error: function(error_msg){
-//        console.error(error_msg)
-//      }
-//    });
-
-
-
-//  } else {
-//    alert("No has seleccionado la ruta");
-//  }
-
-// })
-
 //Muestra seccion Añadir
 $('#btn_add').on('click', function(){
   console.log("ADD");
@@ -100,17 +33,19 @@ $('#btn_add').on('click', function(){
   $('#add_entry').removeClass('hidden')
 })
 
+var rutas = []
 
-var entries = [];
 ///Carga el nombre de las rutas en el select
 function getFields(){
-  //$("#nombre_rutas").children("option").remove();
+  $("#selectRuta").children("option").remove();
+  $("#nombre_rutas").children("option").remove();
   $.ajax({
     url: "https://myclimbingdiary.herokuapp.com/rutas",
     method: "GET",
     dataType: "json",
 
     success: function(data){
+      rutas = data;
       //entries = data;
       //let zonas = data;
       //let zonasUnicas = Array.from(new Set(zonas.map(a => a.zona)));
@@ -127,20 +62,8 @@ function getFields(){
         </option>
         `
       }
-      $("#selectZona").append(nuevo_html);
-
-      // Llenar select de grados
-      // nuevo_html = " ";
-      // nuevo_html += `<option id="nulo"></option>`;
-      // for (var i = 0; i < gradosUnicos.length; i++) {
-      //   fields = data
-      //   nuevo_html += `
-      //   <option value="${gradosUnicos[i]}">
-      //     ${gradosUnicos[i]}
-      //   </option>
-      //   `
-      // }
-      // $("#selectGrado").append(nuevo_html);
+      $("#selectRuta").append(nuevo_html);
+      $("#nombre_rutas").append(nuevo_html);
     },
     error: function(error_msg){
       console.error(error_msg)
@@ -148,6 +71,8 @@ function getFields(){
   });
 }
 getFields();
+
+var entries = [];
 
 function getEntries(){
   //$("#nombre_rutas").children("option").remove();
@@ -163,34 +88,6 @@ function getEntries(){
 
     success: function(data){
       entries = data;
-      //let zonasUnicas = Array.from(new Set(zonas.map(a => a.zona)));
-      // let gradosUnicos = Array.from(new Set(zonas.map(a => a.grado)));
-      //console.log(entries);
-      // Llenar select de zonas 
-      // let nuevo_html = " ";
-      // nuevo_html += `<option id="nulo"></option>`;
-      // for (var i = 0; i < entries.length; i++) {
-      //   fields = data
-      //   nuevo_html += `
-      //   <option value="${entries[i].nombre}">
-      //     ${entries[i].nombre}
-      //   </option>
-      //   `
-      // }
-      // $("#selectZona").append(nuevo_html);
-
-      // Llenar select de grados
-      // nuevo_html = " ";
-      // nuevo_html += `<option id="nulo"></option>`;
-      // for (var i = 0; i < gradosUnicos.length; i++) {
-      //   fields = data
-      //   nuevo_html += `
-      //   <option value="${gradosUnicos[i]}">
-      //     ${gradosUnicos[i]}
-      //   </option>
-      //   `
-      // }
-      // $("#selectGrado").append(nuevo_html);
     },
     error: function(error_msg){
       console.error(error_msg)
@@ -202,7 +99,7 @@ getEntries();
 // Search
 $('#btn-search').on('click', function(){
   $("#diaryEntries").empty();
-  let nombre = $('#selectZona').children('option:selected').val();
+  let nombre = $('#selectRuta').children('option:selected').val();
   // let grado = $('#selectGrado').children('option:selected').val();
 
 
@@ -214,88 +111,107 @@ $('#btn-search').on('click', function(){
       if(entries[i].nombre == nombre) {
         nuevo_html += `
         <div class="col-sm-4">
-        <div class="card bg-light">
-          <div class="card-header">
-            <h5 id="entry_name">${entries[i].nombre}</h5>
-          </div>
-            <div class="card-body">
-              <p class="card-text">
-                <strong>Zona:</strong> ${entries[i].zona}
-              </p>
-              <p class="card-text">
-                <strong>Grado:</strong> ${entries[i].grado}
-              </p>
-              <p class="card-text">
-                <strong>Pegues:</strong> ${entries[i].pegues[0].numeroPegues}
-              </p>
-              <p class="card-text">
-                <strong>Pegues:</strong> ${entries[i].pegues[0].comentario}
-              </p>
-              <button type="button" class="btn btn-danger">
-                Delete
-              </button>
-              <button type="button" class="btn btn-primary">
-                Edit
-              </button>
+          <div class="card bg-light">
+            <div class="card-header">
+              <h5 id="entry_name">${entries[i].nombre}</h5>
             </div>
+              <div class="card-body">
+                <p class="card-text">
+                  <strong>Zona:</strong> ${entries[i].zona}
+                </p>
+                <p class="card-text">
+                  <strong>Grado:</strong> ${entries[i].grado}
+                </p>
+                <p class="card-text">
+                  <strong>Pegues:</strong> ${entries[i].pegues[0].numeroPegues}
+                </p>
+                <p class="card-text">
+                  <strong>Pegues:</strong> ${entries[i].pegues[0].comentario}
+                </p>
+                <button type="button" class="btn btn-danger">
+                  Delete
+                </button>
+                <button type="button" class="btn btn-primary">
+                  Edit
+                </button>
+              </div>
+          </div>
+          <br>
         </div>
-        <br>
-      </div>
         `
       }
+    } else {
+      nuevo_html += `
+        <div class="col-sm-4">
+          <div class="card bg-light">
+            <div class="card-header">
+              <h5 id="entry_name">${entries[i].nombre}</h5>
+            </div>
+              <div class="card-body">
+                <p class="card-text">
+                  <strong>Zona:</strong> ${entries[i].zona}
+                </p>
+                <p class="card-text">
+                  <strong>Grado:</strong> ${entries[i].grado}
+                </p>
+                <p class="card-text">
+                  <strong>Pegues:</strong> ${entries[i].pegues[0].numeroPegues}
+                </p>
+                <p class="card-text">
+                  <strong>Pegues:</strong> ${entries[i].pegues[0].comentario}
+                </p>
+                <button type="button" class="btn btn-danger">
+                  Delete
+                </button>
+                <button type="button" class="btn btn-primary">
+                  Edit
+                </button>
+              </div>
+          </div>
+          <br>
+        </div>
+        `
     } 
    
 
     }
-    
-  if(nuevo_html == ""){
-    alert("No se encontraron rutas");
-  } else {
     $("#diaryEntries").append(nuevo_html);
-  }
 })
 
-// var fields, nomSelec;
-// getFields();
+// modal Diary
+$('#nombre_rutas').on('change', function(){
+  $('#answer_grados').empty();
+  $('#answer_zona').empty();
+  let nombre = $(this).val();
+  // let grado = $('#selectGrado').children('option:selected').val();
 
-//Saca valor zona y grado
-function getInfoField(seleccionadoField){
-  nomSelec= seleccionadoField.nombre
-  console.log(nomSelec)
-  if(seleccionadoField.grado != null){
-    $('#answer_grados').text(seleccionadoField.grado)
-  }
-  if(seleccionadoField.zona != null){
-    $('#answer_zona').text(seleccionadoField.zona)
-  }
 
-}
+  // $("#diaryEntries").innerHTML = "";
+  let nuevo_html = " ";
+  for (var i = 0; i < rutas.length; i++) {
+    // Si hay zona y grado
+    if (nombre != '') {
+      if(rutas[i].nombre == nombre) {
+        nuevo_html += `${rutas[i].grado}`
+        $('#answer_grados').append(nuevo_html)
 
-//Cambia el valor de nombre
-$("#nombre_rutas").on('change', function(event){
-  let seleccionado = $(this).val();
-  if(seleccionado != "nulo"){
-    //Remove the "Select the category" option
-    $("#nulo").remove();
-  }
-
-  //Buscar por el valor seleccionado entre todos los Fields
-  for (var i = 0; i < fields.length; i++) {
-    if(fields[i]._id == seleccionado){
-      getInfoField(fields[i]);
+        nuevo_html = ""
+        nuevo_html += `${rutas[i].zona}`
+        $('#answer_zona').append(nuevo_html)
+      }
     }
+   
+
   }
 })
-
-
-
 
 //Añade nuevo Registro
 $('#btn_save').on('click', function(){
+  let nombre = $('#nombre_rutas').children('option:selected').val();
   //checa si se selecciono una ruta
-  if(nomSelec != null){
+  if(nombre != ""){
     json_to_send = {
-      "nombre": nomSelec,
+      "nombre": nombre,
       "grado": $('#answer_grados').text(),
       "zona": $('#answer_zona').text(),
       "pegues": [{

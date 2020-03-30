@@ -342,3 +342,7 @@ label {
   float: right;
   margin: 3px;
 }
+
+#com {
+  width: 100%;
+}

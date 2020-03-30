@@ -63,10 +63,10 @@
 		<div class="row">		
 			<div class="form" style="padding-left: 10px;">
 				<div class="form-group">
-	    			<label for="selectZona">
-	    				<h5>Selecciona una zona</h5>
+	    			<label for="selectRuta">
+	    				<h5>Selecciona una ruta</h5>
 	    			</label>
-	    			<select class="form-control" id="selectZona">
+	    			<select class="form-control" id="selectRuta">
 	      				<!-- <option>La Boca</option>
 	      				<option>2</option>
 	      				<option>3</option>
@@ -88,98 +88,8 @@
 
 		<!-- DIARY -->
 		<div class="row" id="diaryEntries">
-			<!-- <div class="col-sm-4">
-				<div class="card bg-light">
-					<div class="card-header">
-					 	<h5 id="entry_name">Nombre Ruta</h5>
-					</div>
-				  	<div class="card-body">
-					    <p class="card-text">
-					    	<strong>Zona:</strong> La Boca
-					    </p>
-					    <p class="card-text">
-					    	<strong>Grado:</strong> 5.12d
-					    </p>
-					    <p class="card-text">
-			                <strong>Pegues:</strong> 2
-			            </p>
-			            <p class="card-text">
-			                Comentario
-			            </p>
-				  		<button type="button" class="btn btn-danger">
-				  			Delete
-				  		</button>
-				  		<button type="button" class="btn btn-primary">
-				  			Edit
-				  		</button>
-				  	</div>
-				</div>
-				<br>
-			</div> -->
+
 		</div>
-
-		<!-- <div class="row" style="margin-top: 30px; width: 80%;"> -->
-			<!-- <div class="col-md-12">
-				<div class="container">
-
-					<section id="search_form" style="display: none"> -->
-						<!-- <div class="logout" id= "btn_logout">Logout</div> -->
-						<!-- <div id="logo">My Climbing Diary</div> -->
-						<!-- <label>Nombre</label>
-						<select id="nombre_rutas">
-						</select><br>
-						<label>Grado de dificultad:</label> <label id="answer_grados"></label>
-						<label>Zona:</label> <label id="answer_zona"></label>
-
-						<button id="btn_select" class="button">Seleccionar</button>
-						<button id="btn_add" class="button">Anadir</button>
-						
-					</section>
-				</div>
-			</div> -->
-			<!-- <div class="row" style="margin-top: 30px;"> -->
-				<!-- <div class="col-md-12">
-					<div class="container">
-						<section id="display_entries" class="hidden">
-							<div id=form>
-								<div id="title"> Entradas</div>
-								<section id="miniForm" class="group">
-									<label id="nombre">Nombre</label>
-									<label id="fecha">
-										Fecha
-									</label>
-									<label id="pegues"> 8 pegues</label>
-
-									<div id="comment">
-										<label id="acomment">Comentario mama</label>
-										<input id="ncomment" type="text" name="newcomentario" placeholder="add new comment"
-											class="hidden">
-									</div>
-									<button id="btn_edit" class="button">Editar</button>
-									<button id="btn_patch" value="${data[i]._id}" class="hidden">Actualizar</button>
-									<button id="btn_delete" value="${data[i]._id}" class="button">Eliminar</button>
-								</section>
-							</div>
-						</section>
-					</div>
-
-					<section id="add_entry" class="hidden">
-						<div id=form>
-							<div id="title"> Registro </div>
-							<section id="miniForm">
-								<label id="fecha">Selecciona Fecha</label>
-								<input id="date" type="date" value="2017-06-01">
-								<label id="pegues">Numero Pegues</label>
-								<input id="num" type="text" name="pegue" placeholder="2">
-								<textarea id="com" rows="4" cols="50" placeholder="Comentario"></textarea>
-								<button id="btn_save" class="button">Guardar</button>
-							</section>
-						</div>
-					</section>
-				</div> -->
-			<!-- </div> -->
-			
-		<!-- </div> -->
 	</div>
 
 	<!-- MODAL DIARY -->
@@ -224,7 +134,7 @@
 			  </div>
 
 			  <div>
-			  	<textarea id="com" rows="4" cols="60" placeholder="Comentario"></textarea>
+			  	<textarea id="com" rows="4" placeholder="Comentario"></textarea>
 			  </div>
 			</form>
 	      </div>
