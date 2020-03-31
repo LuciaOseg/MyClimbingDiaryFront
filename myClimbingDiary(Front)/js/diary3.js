@@ -123,10 +123,13 @@ $('#btn-search').on('click', function(){
                   <strong>Grado:</strong> ${entries[i].grado}
                 </p>
                 <p class="card-text">
+                  <strong>Fecha:</strong> ${entries[i].pegues[0].fecha}
+                </p>
+                <p class="card-text">
                   <strong>Pegues:</strong> ${entries[i].pegues[0].numeroPegues}
                 </p>
                 <p class="card-text">
-                  <strong>Pegues:</strong> ${entries[i].pegues[0].comentario}
+                  ${entries[i].pegues[0].comentario}
                 </p>
                 <button type="button" class="btn btn-danger">
                   Delete
@@ -155,10 +158,13 @@ $('#btn-search').on('click', function(){
                   <strong>Grado:</strong> ${entries[i].grado}
                 </p>
                 <p class="card-text">
+                  <strong>Fecha:</strong> ${entries[i].pegues[0].fecha}
+                </p>
+                <p class="card-text">
                   <strong>Pegues:</strong> ${entries[i].pegues[0].numeroPegues}
                 </p>
                 <p class="card-text">
-                  <strong>Pegues:</strong> ${entries[i].pegues[0].comentario}
+                  ${entries[i].pegues[0].comentario}
                 </p>
                 <button type="button" class="btn btn-danger">
                   Delete
