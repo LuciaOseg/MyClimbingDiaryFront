@@ -166,10 +166,10 @@ $('#btn-search').on('click', function(){
                 <p class="card-text">
                   ${entries[i].pegues[0].comentario}
                 </p>
-                <button type="button" class="btn btn-danger">
+                <button type="button" class="btn btn-danger "btn_delete>
                   Delete
                 </button>
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary btn_edit" data-toggle="modal" data-target="#modalEdit">
                   Edit
                 </button>
               </div>
@@ -184,7 +184,7 @@ $('#btn-search').on('click', function(){
     $("#diaryEntries").append(nuevo_html);
 })
 
-// modal Diary
+// modal Diary Nuevo Registro
 $('#nombre_rutas').on('change', function(){
   $('#answer_grados').empty();
   $('#answer_zona').empty();
@@ -206,8 +206,6 @@ $('#nombre_rutas').on('change', function(){
         $('#answer_zona').append(nuevo_html)
       }
     }
-   
-
   }
 })
 
@@ -268,73 +266,74 @@ $('#btn_save').on('click', function(){
 
 //Editar Registros
 //Muestra Editar
-$(document).on('click',"#btn_edit", function(){
+$(document).on('click',".btn_edit", function(){
   console.log("EDIT");
-  $('#acomment').addClass('hidden')
-  $('#ncomment').removeClass('hidden')
-  $('#btn_patch').removeClass('hidden')
-  $('#btn_patch').addClass('button')
-  $(this).removeClass('button')
-  $(this).addClass('hidden')
+  // $('#acomment').addClass('hidden')
+  // $('#ncomment').removeClass('hidden')
+  // $('#btn_patch').removeClass('hidden')
+  // $('#btn_patch').addClass('button')
+  // $(this).removeClass('button')
+  // $(this).addClass('hidden')
+
 })
 
 
 
 //Eliminar Registro
-$(document).on('click', '#btn_delete', function(event) {
-    event.preventDefault();
-    const id = $(this).attr('value');
-    console.log(id + "Borrando... ");
-   $.ajax({
-    //url: 'http://localhost:3000/users',
-    url: 'https://myclimbingdiary.herokuapp.com/proyectos/' + id,
-    method: 'DELETE',
-    success: function(){
-      alert("Registro Eliminado");
-      console.log('Deleted ');
-      window.location = 'climbingDiary3.html'
-    },
-    error: function(error_msg) {
-        alert((error_msg['responseText']));
-    }
-  });
-})
+// $(document).on('click', '#btn_delete', function(event) {
+//     event.preventDefault();
+//     const id = $(this).attr('value');
+//     console.log(id + "Borrando... ");
+//    $.ajax({
+//     //url: 'http://localhost:3000/users',
+//     url: 'https://myclimbingdiary.herokuapp.com/proyectos/' + id,
+//     method: 'DELETE',
+//     success: function(){
+//       alert("Registro Eliminado");
+//       console.log('Deleted ');
+//       window.location = 'climbingDiary3.html'
+//     },
+//     error: function(error_msg) {
+//         alert((error_msg['responseText']));
+//     }
+//   });
+// })
 
 //Editar Registro
-/*$(document).on('click', '#btn_edit', function(event) {
-    event.preventDefault();
-    const id = $(this).attr('value');
-    console.log(id + "Editando... ");
-    $.ajax({
-        url: 'https://myclimbingdiary.herokuapp.com/proyectos/' + id,
-        method: 'PATCH'
-        }).done(function(res) {
-            if (res.success) {
-            console.log('id from ajax call is', res);
-            window.location = 'climbingDiary.html';
-        } else {
-            console.log('error...ajax');
-            }
-});
-})*/
+// $(document).on('click', '#btn_edit', function(event) {
+//     event.preventDefault();
+//     const id = $(this).attr('value');
+//     console.log(id + "Editando... ");
+//     $.ajax({
+//         url: 'https://myclimbingdiary.herokuapp.com/proyectos/' + id,
+//         method: 'PATCH'
+//         }).done(function(res) {
+//             if (res.success) {
+//             console.log('id from ajax call is', res);
+//             window.location = 'climbingDiary.html';
+//         } else {
+//             console.log('error...ajax');
+//             }
+// });
+// })
 
 $(document).on('click','#btn_patch', function(event){
     event.preventDefault();
-    const id = $(this).attr('value');
+    // const id = $(this).attr('value');
 
     json_to_send = {
-      "nombre": nomSelec,
-      "grado": $('#answer_grados').text(),
-      "zona": $('#answer_zona').text(),
+      "nombre": $('#_ruta').val(),
+      "grado": $('#_grados').text(),
+      "zona": $('#_zona').text(),
       "pegues": [{
-        "fecha": $('#date').val(),
-        "numeroPegues": $('#num').val(),
-        "comentario": $('#ncomment').val()
+        "fecha": $('#_date').val(),
+        "numeroPegues": $('#_num').val(),
+        "comentario": $('#_com').val()
       }]
     };
 
     //checa si se llenaron los campos
-    if($('#ncomment').val()!= ""){
+    if($('#_com').val()!= ""){
         json_to_send = JSON.stringify(json_to_send);
 
         $.ajax({
