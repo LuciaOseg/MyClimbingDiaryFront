@@ -23,7 +23,7 @@ $('#login_button').on('click', function(){
     success: function(data){
       // guardar token en localstorage o cookie
       localStorage.setItem('token', data.token)
-      window.location = 'climbingDiary3.html'
+      window.location = 'climbingDiary4.html'
     },
     error: function(error_msg) {
       //alert((error_msg['responseText']));
