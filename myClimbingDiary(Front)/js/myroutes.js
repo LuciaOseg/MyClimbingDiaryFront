@@ -29,6 +29,9 @@ function getRutas(){
                                               <p class="card-text">
                                                 <strong>Grado:</strong> ${data[i].grado}
                                               </p>
+                                              <button id="btn_delete" type="button" class="btn btn-danger" value="${data[i]._id}">
+                                                Delete
+                                              </button>
                                             </div>
                                           </div>
                                             <br>
@@ -82,6 +85,26 @@ $('#btn_save').on('click', function(){
     //}else{
       //alert("Te falta llenar los campos");
     //}
+})
+
+//Eliminar Registro
+$(document).on('click', '#btn_delete', function(event) {
+  event.preventDefault();
+  const id = $(this).attr('value');
+  console.log(id + "Borrando... ");
+ $.ajax({
+  //url: 'http://localhost:3000/users',
+  url: 'https://myclimbingdiary.herokuapp.com/misrutas/' + id,
+  method: 'DELETE',
+  success: function(){
+    alert("Registro Eliminado");
+    console.log('Deleted ');
+    window.location = 'myRoutes.html'
+  },
+  error: function(error_msg) {
+      alert((error_msg['responseText']));
+  }
+});
 })
 
 
