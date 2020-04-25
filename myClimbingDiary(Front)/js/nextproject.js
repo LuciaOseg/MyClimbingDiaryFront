@@ -1,5 +1,9 @@
+// Variables globales
 var rutas = [];
-///Carga el nombre de las rutas en el select
+var zonasAdmin = [];
+var gradosAdmin = [];
+
+// Jala las rutas del administrador
 function getFields(){
   $("#nombre_rutas").children("option").remove();
 $.ajax({
@@ -8,48 +12,76 @@ $.ajax({
   dataType: "json",
 
   success: function(data){
-    rutas = data;
-    let zonas = data;
-    let zonasUnicas = Array.from(new Set(zonas.map(a => a.zona)));
-    let gradosUnicos = Array.from(new Set(zonas.map(a => a.grado)));
-    
-    // Llenar select de zonas 
-    let nuevo_html = " ";
-    nuevo_html += `<option id="nulo"></option>`;
-    for (var i = 0; i < zonasUnicas.length; i++) {
-      fields = data
-      nuevo_html += `
-      <option value="${zonasUnicas[i]}">
-        ${zonasUnicas[i]}
-      </option>
-      `
-    }
-    $("#selectZona").append(nuevo_html);
-
-    // Llenar select de grados
-    nuevo_html = " ";
-    nuevo_html += `<option id="nulo"></option>`;
-    for (var i = 0; i < gradosUnicos.length; i++) {
-      fields = data
-      nuevo_html += `
-      <option value="${gradosUnicos[i]}">
-        ${gradosUnicos[i]}
-      </option>
-      `
-    }
-    $("#selectGrado").append(nuevo_html);
+    rutas.push(...data);
+    getRutas();
   },
   error: function(error_msg){
     console.error(error_msg)
   }
 });
 }
-getFields();
+
+// Jala las rutas del usuario
+function getRutas(){
+  $.ajax({
+    url: "https://myclimbingdiary.herokuapp.com/misrutas",
+    headers: {
+       'Content-Type':'application/json',
+       'Authorization': 'Bearer ' + token
+   },
+    method: "GET",
+    dataType: "json",
+    success: function(data){
+      rutas.push(...data);
+      fillSelect();
+    },
+    error: function(error_msg){
+      console.error(error_msg)
+    }
+  });
+
+}
+
+// Llena el select con la información correspondiente
+function fillSelect() {
+  let zonasUnicas = Array.from(new Set(rutas.map(a => a.zona)));
+  let gradosUnicos = Array.from(new Set(rutas.map(a => a.grado)));
+      
+  // Llenar select de zonas 
+  let nuevo_html = " ";
+  nuevo_html += `<option id="nulo"></option>`;
+  for (var i = 0; i < zonasUnicas.length; i++) {
+    fields = rutas
+    nuevo_html += `
+    <option value="${zonasUnicas[i]}">
+      ${zonasUnicas[i]}
+    </option>
+    `
+  }
+  $("#selectZona").append(nuevo_html);
+
+  // Llenar select de grados
+  nuevo_html = " ";
+  nuevo_html += `<option id="nulo"></option>`;
+  for (var i = 0; i < gradosUnicos.length; i++) {
+    fields = rutas
+    nuevo_html += `
+    <option value="${gradosUnicos[i]}">
+      ${gradosUnicos[i]}
+    </option>
+    `
+  }
+  $("#selectGrado").append(nuevo_html);
+}
+
+
 //Jala el token para futuras acciones
 var token = localStorage.getItem('token');
 if (token) {
   token = token.replace(/^"(.*)"$/, '$1'); // Remove quotes from token start/end.
 }
+
+getFields();
 
 // Search
 $('#btn-search').on('click', function(){
@@ -58,7 +90,6 @@ $('#btn-search').on('click', function(){
   let zona = $('#selectZona').children('option:selected').val();
   let grado = $('#selectGrado').children('option:selected').val();
 
-  
 
   $("#resultados_busqueda").innerHTML = "";
   let nuevo_html = " ";
