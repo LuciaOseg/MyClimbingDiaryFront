@@ -183,13 +183,13 @@ $('#btn-search').on('click', function(){
                 <button id="btn_delete" type="button" class="btn btn-danger" value="${entries[i]._id}">
                   Delete
                 </button>
-                <button id="btn_cancel" type="button" class="btn btn-danger" hidden>
+                <button id="btn_cancel" type="button" class="btn btn-danger" style="display: none">
                 Cancel
                 </button>
                 <button id="btn_edit" type="button" class="btn btn-primary">
                   Edit
                 </button>
-                <button id="btn_patch" type="button" class="btn btn-primary" value="${entries[i]._id}" hidden>
+                <button id="btn_patch" type="button" class="btn btn-primary" value="${entries[i]._id}" style="display: none">
                 Save
                 </button>
             </div>
@@ -228,13 +228,13 @@ $('#btn-search').on('click', function(){
                 <button id="btn_delete" type="button" class="btn btn-danger" value="${entries[i]._id}">
                   Delete
                 </button>
-                <button id="btn_cancel" type="button" class="btn btn-danger" hidden>
+                <button id="btn_cancel" type="button" class="btn btn-danger" style="display: none">
                 Cancel
                 </button>
                 <button id="btn_edit" type="button" class="btn btn-primary btn_edit" data-toggle="modal" >
                   Edit
                 </button>
-                <button id="btn_patch" type="button" class="btn btn-primary" value="${entries[i]._id}" hidden>
+                <button id="btn_patch" type="button" class="btn btn-primary" value="${entries[i]._id}" style="display: none">
                 Save
                 </button>
               </div>
@@ -353,10 +353,10 @@ $('#diaryEntries').on('click', "#btn_edit", function() {
   
 
   //Si le epica editar, esconde boton de editar y eliminar y muestra gbotones de guardar y cancelar
-  $(this).addClass('hidden')
-  $(this).siblings('#btn_patch').removeAttr("hidden")
-  $(this).siblings('#btn_delete').hide()
-  $(this).siblings('#btn_cancel').removeAttr("hidden")
+  $(this).toggle()
+  $(this).siblings('#btn_patch').toggle()
+  $(this).siblings('#btn_delete').toggle()
+  $(this).siblings('#btn_cancel').toggle()
 
 });
 
@@ -366,11 +366,11 @@ $('#diaryEntries').on('click',"#btn_cancel", function(){
   //Si le pica cancelar, el comentario ya no es editable
   $(this).siblings('#acomment').attr('contenteditable', 'false');
 
-  //Si le epica editar, esconde boton de editar y eliminar y muestra gbotones de guardar y cancelar
-  $(this).addClass('hidden')
-  $(this).siblings('#btn_patch').hide()
-  $(this).siblings('#btn_edit').show()
-  $(this).siblings('#btn_delete').show()
+  //Si le epica cancelar, esconde boton de cancelar y guardar y muestra botones de editar y borrar
+  $(this).toggle()
+  $(this).siblings('#btn_patch').toggle()
+  $(this).siblings('#btn_edit').toggle()
+  $(this).siblings('#btn_delete').toggle()
   
 })
 
