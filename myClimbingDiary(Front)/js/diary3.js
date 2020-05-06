@@ -105,6 +105,7 @@ $('#btn-search').on('click', function(){
 
   $("#diaryEntries").innerHTML = "";
   let nuevo_html = " ";
+  console.log(entries)
   for (var i = 0; i < entries.length; i++) {
     // Si hay zona y grado
     if (nombre != '') {
@@ -131,10 +132,10 @@ $('#btn-search').on('click', function(){
                 <p class="card-text">
                   ${entries[i].pegues[0].comentario}
                 </p>
-                <button type="button" class="btn btn-danger">
+                <button type="button" class="btn btn-danger" value="${i}">
                   Delete
                 </button>
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary" value="${i}">
                   Edit
                 </button>
               </div>
@@ -166,10 +167,10 @@ $('#btn-search').on('click', function(){
                 <p class="card-text">
                   ${entries[i].pegues[0].comentario}
                 </p>
-                <button type="button" class="btn btn-danger "btn_delete>
+                <button type="button" class="btn btn-danger btn_delete" value="${i}">
                   Delete
                 </button>
-                <button type="button" class="btn btn-primary btn_edit" data-toggle="modal" data-target="#modalEdit">
+                <button type="button" class="btn btn-primary btn_edit" data-toggle="modal" data-target="#modalEdit" value="${i}">
                   Edit
                 </button>
               </div>
@@ -268,6 +269,21 @@ $('#btn_save').on('click', function(){
 //Muestra Editar
 $(document).on('click',".btn_edit", function(){
   console.log("EDIT");
+
+  console.log($(this).val());
+
+  let i = $(this).val()
+
+  $('#_ruta').val(entries[i].nombre);
+  $('#_grados').val(entries[i].grado);
+  $('#_zona').val(entries[i].zona);
+  // $('#_date').val(entries[i].pegues[0].fecha);
+  $('#_num').val(entries[i].pegues[0].numeroPegues);
+  $('#_com').val(entries[i].pegues[0].comentario);
+
+  $('#btn_patch').val(i);
+
+  console.log($('#btn_patch').val());
   // $('#acomment').addClass('hidden')
   // $('#ncomment').removeClass('hidden')
   // $('#btn_patch').removeClass('hidden')
@@ -276,7 +292,6 @@ $(document).on('click',".btn_edit", function(){
   // $(this).addClass('hidden')
 
 })
-
 
 
 //Eliminar Registro
@@ -319,12 +334,18 @@ $(document).on('click',".btn_edit", function(){
 
 $(document).on('click','#btn_patch', function(event){
     event.preventDefault();
-    // const id = $(this).attr('value');
+    let i = $('#btn_patch').val();
+
+    const id = entries[i]._id;
+
+    console.log(id);
+
+    console.log($('#_date').val());
 
     json_to_send = {
       "nombre": $('#_ruta').val(),
-      "grado": $('#_grados').text(),
-      "zona": $('#_zona').text(),
+      "grado": $('#_grados').val(),
+      "zona": $('#_zona').val(),
       "pegues": [{
         "fecha": $('#_date').val(),
         "numeroPegues": $('#_num').val(),

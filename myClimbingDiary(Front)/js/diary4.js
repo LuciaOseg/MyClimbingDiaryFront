@@ -37,6 +37,8 @@ var date
 
 var rutas = []
 
+var misrutas = []
+
 ///Carga el nombre de las rutas en el select
 function getFields(){
   $("#selectRuta").children("option").remove();
@@ -73,6 +75,46 @@ function getFields(){
   });
 }
 getFields();
+
+///Carga el nombre de las rutas en el select
+function getmyFields(){
+  // $("#selectRuta").children("option").remove();
+  // $("#nombre_rutas").children("option").remove();
+  $.ajax({
+    url: "https://myclimbingdiary.herokuapp.com/misrutas",
+    headers: {
+       'Content-Type':'application/json',
+       'Authorization': 'Bearer ' + token
+   },
+    method: "GET",
+    dataType: "json",
+    success: function(data){
+      misrutas = data;
+      //entries = data;
+      //let zonas = data;
+      //let zonasUnicas = Array.from(new Set(zonas.map(a => a.zona)));
+      // let gradosUnicos = Array.from(new Set(zonas.map(a => a.grado)));
+      //console.log(entries);
+      // Llenar select de zonas 
+      let nuevo_html = " ";
+      // nuevo_html += `<option id="nulo"></option>`;
+      for (var i = 0; i < data.length; i++) {
+        misrutas = data
+        nuevo_html += `
+        <option value="${data[i].nombre}">
+          ${data[i].nombre}
+        </option>
+        `
+      }
+      $("#selectRuta").append(nuevo_html);
+      $("#nombre_rutas").append(nuevo_html);
+    },
+    error: function(error_msg){
+      console.error(error_msg)
+    }
+  });
+}
+getmyFields();
 
 var entries = [];
 
@@ -218,7 +260,7 @@ $('#nombre_rutas').on('change', function(){
 
 
   // $("#diaryEntries").innerHTML = "";
-  let nuevo_html = " ";
+  let nuevo_html = "";
   for (var i = 0; i < rutas.length; i++) {
     // Si hay zona y grado
     if (nombre != '') {
@@ -231,6 +273,21 @@ $('#nombre_rutas').on('change', function(){
         $('#answer_zona').append(nuevo_html)
       }
     }
+  }
+  if(nuevo_html == ""){
+    for (var i = 0; i < misrutas.length; i++) {
+    // Si hay zona y grado
+    if (nombre != '') {
+      if(misrutas[i].nombre == nombre) {
+        nuevo_html += `${misrutas[i].grado}`
+        $('#answer_grados').append(nuevo_html)
+
+        nuevo_html = ""
+        nuevo_html += `${misrutas[i].zona}`
+        $('#answer_zona').append(nuevo_html)
+      }
+    }
+  }
   }
 })
 
