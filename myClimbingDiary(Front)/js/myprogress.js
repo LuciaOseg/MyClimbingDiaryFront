@@ -35,6 +35,10 @@ var entries = [];
 var rutas = [];
 var pegues = [];
 
+var rutasCompletas = [];
+var zonas = [];
+var rutasPorZona = [];
+
 function getEntries(){
   //$("#nombre_rutas").children("option").remove();
   $.ajax({
@@ -49,7 +53,7 @@ function getEntries(){
 
     success: function(data){
       entries = data;
-      // console.log(data)
+      console.log(data)
 
       // datos para las chart 1
       // nombres de las rutas y número de pegues
@@ -62,10 +66,31 @@ function getEntries(){
         else {
           rutas.push(entries[i].nombre);
           pegues.push(parseInt(entries[i].pegues[0].numeroPegues));
+          // Incluir en rutasCompletas la entrada completa porque sirve para la segunda gráfica
+          rutasCompletas.push(entries[i]);
         }
       }
+      console.log(rutas)
+      console.log(pegues)
      
       dataChart1()
+
+      // datos para la chart 2 - Número de rutas por zonas
+      for (i = 0; i < rutasCompletas.length; i++) {
+        if($.inArray(rutasCompletas[i].zona, zonas) >= 0) {
+          let index = zonas.indexOf(rutasCompletas[i].zona);
+          rutasPorZona[index] = rutasPorZona[index] + 1;
+        }
+        else {
+          zonas.push(rutasCompletas[i].zona);
+          let index = zonas.indexOf(rutasCompletas[i].zona);
+          rutasPorZona[index] = 1;
+        }
+      }
+      console.log(rutasCompletas)
+      console.log(zonas)
+      console.log(rutasPorZona)
+      dataChart2();
     },
     error: function(error_msg){
       console.error(error_msg)
@@ -84,6 +109,16 @@ function dataChart1() {
   // console.log(data)
 
   new Chartist.Bar('#chart1', data);
+}
+
+function dataChart2() {
+  data = {
+    labels: zonas,
+    series: [rutasPorZona]
+  };
+  // console.log(data)
+
+  new Chartist.Bar('#chart2', data);
 }
 
 
