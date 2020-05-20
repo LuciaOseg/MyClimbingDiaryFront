@@ -264,3 +264,11 @@ label {
 .card .btn {
   float: right;
 }
+
+.ct-chart{
+  background-color: rgba(255, 255, 255, .5);
+}
+
+.ct-chart .ct-bar {
+  stroke-width : 15%;
+}
