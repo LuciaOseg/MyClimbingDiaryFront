@@ -272,3 +272,11 @@ label {
 .ct-chart .ct-bar {
   stroke-width : 15%;
 }
+
+.chart_title {
+  text-align: center;
+}
+
+.ct-chart .ct-label {
+  color: #000000;
+}

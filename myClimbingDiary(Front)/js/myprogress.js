@@ -49,13 +49,20 @@ function getEntries(){
 
     success: function(data){
       entries = data;
-      console.log(data)
+      // console.log(data)
 
       // datos para las chart 1
       // nombres de las rutas y número de pegues
       for(i = 0; i < entries.length; i++) {
-        rutas.push(entries[i].nombre);
-        pegues.push(parseInt(entries[i].pegues[0].numeroPegues));
+        if($.inArray(entries[i].nombre, rutas) >= 0) {
+          // console.log('entry already exists')
+          let index = rutas.indexOf(entries[i].nombre)
+          pegues[index] = pegues[index] + parseInt(entries[i].pegues[0].numeroPegues)
+        }
+        else {
+          rutas.push(entries[i].nombre);
+          pegues.push(parseInt(entries[i].pegues[0].numeroPegues));
+        }
       }
      
       dataChart1()
@@ -74,7 +81,7 @@ function dataChart1() {
     labels: rutas,
     series: [pegues]
   };
-  console.log(data)
+  // console.log(data)
 
   new Chartist.Bar('#chart1', data);
 }
