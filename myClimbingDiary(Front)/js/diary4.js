@@ -413,11 +413,11 @@ $(document).on('click','#btn_patch', function(event){
 
     //Guarda los textos de los campos de la forma en donde se le hizo click, para enviarlos
     //let nombre = $(this).siblings("entry_name").text()
-    let grado= $(this).siblings('#entry_grados').text().replace('Grado: ','')
-    let zona= $(this).siblings('#entry_zona').text().replace('Zona: ','')
-    let fecha= $(this).siblings('#entry_date').text().replace('Fecha: ','')
-    let pegues= $(this).siblings('#entry_pegues').text().replace('Pegues: ','')
-    let comentario= $(this).siblings('#acomment').text()
+    let grado= $(this).siblings('#entry_grados').text().replace('Grado: ','').replace(/\n/ig,'').trim()
+    let zona= $(this).siblings('#entry_zona').text().replace('Zona:','').replace(/\n/ig,'').trim()
+    let fecha= $(this).siblings('#entry_date').text().replace('Fecha: ','').replace(/\n/ig,'').trim()
+    let pegues= $(this).siblings('#entry_pegues').text().replace('Pegues: ','').replace(/\n/ig,'').trim()
+    let comentario= $(this).siblings('#acomment').text().replace(/\n/ig,'').trim()
 
     json_to_send = {
       "nombre": nombre,

@@ -39,6 +39,9 @@ var rutasCompletas = [];
 var zonas = [];
 var rutasPorZona = [];
 
+var grados = []
+var rutasPorGrado = [];
+
 function getEntries(){
   //$("#nombre_rutas").children("option").remove();
   $.ajax({
@@ -70,8 +73,8 @@ function getEntries(){
           rutasCompletas.push(entries[i]);
         }
       }
-      console.log(rutas)
-      console.log(pegues)
+      //console.log(rutas)
+      //console.log(pegues)
      
       dataChart1()
 
@@ -87,10 +90,27 @@ function getEntries(){
           rutasPorZona[index] = 1;
         }
       }
-      console.log(rutasCompletas)
-      console.log(zonas)
-      console.log(rutasPorZona)
+      //console.log(rutasCompletas)
+      //console.log(zonas)
+      //console.log(rutasPorZona)
       dataChart2();
+
+      // datos para la chart 3 - Número de rutas por grado
+      for (i = 0; i < rutasCompletas.length; i++) {
+        if($.inArray(rutasCompletas[i].grado, grados) >= 0) {
+          let index = grados.indexOf(rutasCompletas[i].grado);
+          rutasPorGrado[index] = rutasPorGrado[index] + 1;
+        }
+        else {
+          grados.push(rutasCompletas[i].grado);
+          let index = grados.indexOf(rutasCompletas[i].grado);
+          rutasPorGrado[index] = 1;
+        }
+      }
+      //console.log("rutas completas: ",rutasCompletas)
+      //console.log("grados: ",grados)
+      //console.log("rutas por grado: ", rutasPorGrado)
+      dataChart3();
     },
     error: function(error_msg){
       console.error(error_msg)
@@ -121,5 +141,14 @@ function dataChart2() {
   new Chartist.Bar('#chart2', data);
 }
 
+function dataChart3() {
+  data = {
+    labels: grados,
+    series: [rutasPorGrado]
+  };
+  // console.log(data)
+
+  new Chartist.Bar('#chart3', data);
+}
 
 
