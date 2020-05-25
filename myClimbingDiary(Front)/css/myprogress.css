@@ -271,6 +271,8 @@ label {
 
 .ct-chart .ct-bar {
   stroke-width : 15%;
+  stroke: #212529 !important;
+  /* stroke: DIMGRAY !important; */
 }
 
 .chart_title {
@@ -280,3 +282,7 @@ label {
 .ct-chart .ct-label {
   color: #000000;
 }
+
+/* .ct-series-a .ct-bar, .ct-series-a .ct-line, .ct-series-a .ct-point, .ct-series-a .ct-slice-donut {
+  stroke: purple;
+} */

@@ -58,7 +58,7 @@ function getEntries(){
 
     success: function(data){
       entries = data;
-      console.log(data)
+      // console.log(data)
 
       // datos para las chart 1
       // nombres de las rutas y número de pegues
@@ -82,7 +82,7 @@ function getEntries(){
 
       // datos para la chart 2 y 4 - Número de rutas por zonas, y número de pegues por zona
       for (i = 0; i < rutasCompletas.length; i++) {
-        console.log(rutasCompletas[i]);
+        // console.log(rutasCompletas[i]);
         if($.inArray(rutasCompletas[i].zona, zonas) >= 0) {
           let index = zonas.indexOf(rutasCompletas[i].zona);
           //console.log(rutasCompletas[i].zona);
