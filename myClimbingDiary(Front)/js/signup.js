@@ -24,7 +24,7 @@ if($("#password").val()!= "" & $("#email").val()!= "" & $("#name").val()!= "" &$
     success: function(data){
       alert("Usuario creado con exito");
       console.log('success: '+ data);
-      window.location = 'index2.html'
+      window.location = 'index.html'
     },
     error: function(error_msg) {
       alert((error_msg['responseText']));
