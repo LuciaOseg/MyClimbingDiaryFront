@@ -42,6 +42,8 @@ var rutasPorZona = [];
 var grados = []
 var rutasPorGrado = [];
 
+var entradasPorZona = [];
+
 function getEntries(){
   //$("#nombre_rutas").children("option").remove();
   $.ajax({
@@ -75,25 +77,32 @@ function getEntries(){
       }
       //console.log(rutas)
       //console.log(pegues)
-     
+
       dataChart1()
 
-      // datos para la chart 2 - Número de rutas por zonas
+      // datos para la chart 2 y 4 - Número de rutas por zonas, y número de pegues por zona
       for (i = 0; i < rutasCompletas.length; i++) {
+        console.log(rutasCompletas[i]);
         if($.inArray(rutasCompletas[i].zona, zonas) >= 0) {
           let index = zonas.indexOf(rutasCompletas[i].zona);
+          //console.log(rutasCompletas[i].zona);
           rutasPorZona[index] = rutasPorZona[index] + 1;
+          //console.log(index);
+          entradasPorZona[index] = entradasPorZona[index] + parseInt(pegues[i]);
         }
         else {
           zonas.push(rutasCompletas[i].zona);
           let index = zonas.indexOf(rutasCompletas[i].zona);
           rutasPorZona[index] = 1;
+          entradasPorZona[index] = pegues[i];
         }
       }
-      //console.log(rutasCompletas)
+      //console.log(rutasCompletas);
+      //console.log(entradasPorZona);
       //console.log(zonas)
       //console.log(rutasPorZona)
       dataChart2();
+      dataChart4();
 
       // datos para la chart 3 - Número de rutas por grado
       for (i = 0; i < rutasCompletas.length; i++) {
@@ -111,6 +120,8 @@ function getEntries(){
       //console.log("grados: ",grados)
       //console.log("rutas por grado: ", rutasPorGrado)
       dataChart3();
+
+
     },
     error: function(error_msg){
       console.error(error_msg)
@@ -119,7 +130,7 @@ function getEntries(){
 }
 getEntries();
 
-var data 
+var data
 
 function dataChart1() {
   data = {
@@ -150,5 +161,12 @@ function dataChart3() {
 
   new Chartist.Bar('#chart3', data);
 }
+function dataChart4() {
+  data = {
+    labels: zonas,
+    series: [entradasPorZona]
+  };
+  // console.log(data)
 
-
+  new Chartist.Bar('#chart4', data);
+}
