@@ -60,7 +60,7 @@ $('#btn_save').on('click', function(){
     console.log(json_to_send);
 
     //checa si se llenaron los campos
-    //if($('#v_grado').text()!= "" & $('#n_zona').text()!= ""){
+    if($('#n_ruta').val()!= "" & $('#v_grado').val()!= "" & $('#n_zona').val()!= ""){
         json_to_send = JSON.stringify(json_to_send);
         $.ajax({
           url: 'https://myclimbingdiary.herokuapp.com/misrutas',
@@ -82,9 +82,9 @@ $('#btn_save').on('click', function(){
           }
         });
 
-    //}else{
-      //alert("Te falta llenar los campos");
-    //}
+    }else{
+      alert("Te falta llenar los campos");
+    }
 })
 
 //Eliminar Registro
