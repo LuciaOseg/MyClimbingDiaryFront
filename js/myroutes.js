@@ -99,7 +99,7 @@ $(document).on('click', '#btn_delete', function(event) {
   success: function(){
     alert("Registro Eliminado");
     console.log('Deleted ');
-    window.location = 'myRoutes.html'
+    window.location = 'myroutes.html'
   },
   error: function(error_msg) {
       alert((error_msg['responseText']));
